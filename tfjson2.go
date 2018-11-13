@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/hashicorp/terraform/terraform"
 	"github.com/justinm/tfjson2/tfjson2"
 	"log"
 	"os"
@@ -13,17 +14,28 @@ func getCwd() string {
 }
 
 func main() {
+	var plan *terraform.Plan
 	pathToPlan := flag.String("plan", "", "Path to the plan")
+	useStdin := flag.Bool("stdin", false, "Use stdin to read the plan data")
 
 	flag.Parse()
 
-	if len(*pathToPlan) == 0 {
-		log.Fatal("--plan must be supplied")
-	}
+	if !*useStdin {
+		if len(*pathToPlan) == 0 {
+			log.Fatal("--plan must be supplied")
+		}
 
-	plan, err := tfjson2.OpenPlan(*pathToPlan)
-	if err != nil {
-		log.Fatal(err)
+		p, err := tfjson2.OpenPlan(*pathToPlan)
+		if err != nil {
+			log.Fatal(err)
+		}
+		plan = p
+	} else {
+		p, err := terraform.ReadPlan(os.Stdin)
+		if err != nil {
+			log.Fatal(err)
+		}
+		plan = p
 	}
 
 	exporter := tfjson2.JsonExporter{Plan: plan}
