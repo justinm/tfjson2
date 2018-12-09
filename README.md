@@ -27,7 +27,11 @@ Usage
 ```bash
 terraform plan -out=my.plan
 
-tfvalidate --plan my.plan
+tfjson2 --plan my.plan
+
+Formatted:
+
+tfjson2 --plan my.plan |jq .
 ```
 
 
