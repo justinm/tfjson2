@@ -27,11 +27,11 @@ Usage
 ```bash
 terraform plan -out=my.plan
 
-tfjson2 --plan /tmp/terraform.plan
+tfjson2 --plan my.plan
 
 Formatted:
 
-tfjson2 --plan /tmp/terraform.plan |jq .
+tfjson2 --plan my.plan |jq .
 ```
 
 
