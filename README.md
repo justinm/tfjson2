@@ -24,7 +24,9 @@ Usage
 
 ```bash
 terraform plan -out=my.plan
+```
 
+```bash
 tfjson2 --plan /tmp/terraform.plan
 ```
 
@@ -38,12 +40,14 @@ docker run -it -v /tmp/terraform.plan:/tmp/terraform.plan cloudvar/tfjson_with_o
 Open Policy Agent
 -----
 
-All the OPA policies reside under policies directory
+All OPA policies reside under policies directory
 
 To use OPA
 
 From inside docker (cloudvar/tfjson_with_open-policy-agent:latest)
 
+```bash
+/opa opa eval --data sample-policy.rego --input terraform.plan "data.terraform.analysis.authz"```
 ```bash
 /opa opa eval --data sample-policy.rego --input terraform.plan "data.terraform.analysis.authz"
 ```
