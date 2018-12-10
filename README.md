@@ -1,6 +1,4 @@
-tfjson2 - a tool for exporting Terraform plans as JSON
-
-OPA - Open Policy Agent
+tfjson2 (for exporting Terraform plans as JSON) & OPA (Open Policy Agent)
 ==========
 
 Export your Terraform plans to JSON.
