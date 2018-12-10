@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/justinm/tfjson2/tfjson2"
+	"github.com/cloudvar/tfjson_with_open-policy-agent/tfjson2"
 	"log"
 	"os"
 )

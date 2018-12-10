@@ -1,3 +1,6 @@
+#Forked from https://github.com/justinm/tfjson2
+
+
 tfjson2 - a tool for exporting Terraform plans as JSON
 ==========
 
@@ -9,7 +12,7 @@ Running with Docker
 tfjson2 is also available via a pre-built Docker container.
 
 ```bash
-cat $pathToPlan | docker run -i justoman05/tfjson2 --stdin
+cat $pathToPlan | docker run -i varuntomar2003/tfjson_with_open-policy-agent --stdin
 ```
 
 
@@ -17,7 +20,7 @@ Installing
 ----------
 
 ```bash
-go get github.com/justinm/tfjson2
+go get github.com/cloudvar/tfjson_with_open-policy-agent
 ```
  
  
@@ -33,8 +36,16 @@ tfjson2 --plan /tmp/terraform.plan
 Formatted:
 
 tfjson2 --plan /tmp/terraform.plan |jq .
-
 ```
+
+OPA:
+-----
+
+All the policies are copied under policies directory
+
+To use OPA:
+
+```/opa opa eval --data sample-policy.rego --input terraform.plan "data.terraform.analysis.authz"```
 
 License
 -------
