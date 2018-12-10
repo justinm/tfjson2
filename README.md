@@ -1,12 +1,10 @@
-tfjson2 (for exporting Terraform plans as JSON) & OPA (Open Policy Agent)
+tfjson2 (export Terraform plans as JSON) & OPA (Open Policy Agent)
 ==========
-
-Export your Terraform plans to JSON.
 
 Running with Docker
 -------------------
 
-tfjson2 is also available via a pre-built Docker container.
+tfjson2 with OPA is also available via a pre-built Docker container.
 
 ```bash
 cat $pathToPlan | docker run -i varuntomar2003/tfjson_with_open-policy-agent --stdin
@@ -35,10 +33,10 @@ Formatted:
 tfjson2 --plan /tmp/terraform.plan |jq .
 ```
 
-Open Policy Agent:
+Open Policy Agent
 -----
 
-All the policies are copied under policies directory
+All the OPA policies reside under policies directory
 
 To use OPA:
 
