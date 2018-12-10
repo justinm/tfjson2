@@ -1,7 +1,6 @@
-#Forked from https://github.com/justinm/tfjson2
-
-
 tfjson2 - a tool for exporting Terraform plans as JSON
+OPA - Open Policy Agent
+
 ==========
 
 Export your Terraform plans to JSON.
@@ -38,7 +37,7 @@ Formatted:
 tfjson2 --plan /tmp/terraform.plan |jq .
 ```
 
-OPA:
+Open Policy Agent:
 -----
 
 All the policies are copied under policies directory
