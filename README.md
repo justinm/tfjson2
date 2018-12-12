@@ -1,4 +1,4 @@
-tfjson2 (export Terraform plans as JSON) & OPA (Open Policy Agent)
+tfjson2 (export Terraform plan as JSON) & OPA (Open Policy Agent)
 ==========
 
 Running with Docker
@@ -30,11 +30,11 @@ terraform plan -out=my.plan
 tfjson2 --plan /tmp/terraform.plan
 ```
 
-Inside docker
+Run against the container
 -----
 
 ```bash
-docker run -it -v /tmp/terraform.plan:/tmp/terraform.plan cloudvar/tfjson_with_open-policy-agent:latest --plan /tmp/terraform.plan
+docker run -it -v /tmp/terraform.plan:/tmp/terraform.plan cloudvar/tfjson_with_open-policy-agent:latest tfjson2 --plan /tmp/terraform.plan > /tmp/plan.json
 ```
 
 Open Policy Agent
@@ -42,14 +42,17 @@ Open Policy Agent
 
 All OPA policies reside under policies directory
 
-To use OPA
-
-From inside docker (cloudvar/tfjson_with_open-policy-agent:latest)
+To use OPA, from inside docker (cloudvar/tfjson_with_open-policy-agent:latest)
 
 ```bash
-/opa opa eval --data sample-policy.rego --input terraform.plan "data.terraform.analysis.authz"
+/opa eval --data sample-policy.rego --input terraform.plan "data.terraform.analysis.authz"
 ```
 
+Run against the container
+
+```bash
+docker run -v /tmp/plan.json:/tmp/plan.json -it cloudvar/tfjson_with_open-policy-agent:latest /opa eval --data /opt/policies/sample-policy.rego --input /tmp/plan.json "data.terraform.analysis.authz"
+```
 
 License
 -------
